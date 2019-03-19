@@ -5,6 +5,7 @@ const passport = require("passport");
 
 // Post model
 const Post = require("../../models/Post");
+
 // Profile model
 const Profile = require("../../models/Profile");
 
@@ -37,7 +38,7 @@ router.get("/:id", (req, res) => {
     );
 });
 
-// @route   POST api/posts/
+// @route   POST api/posts
 // @desc    Create post
 // @access  Private
 router.post(
@@ -122,7 +123,7 @@ router.post(
   "/unlike/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(profile => {  
       Post.findById(req.params.id)
         .then(post => {
           if (
